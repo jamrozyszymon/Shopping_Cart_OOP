@@ -5,7 +5,7 @@ namespace src;
 use src\Product;
 use Iterator;
 
-class Cart implements Iterator 
+class Cart implements Iterator
 {
     // Array for products
     protected $products = array();
@@ -43,7 +43,7 @@ class Cart implements Iterator
         if ($amount != 0) {
             $this->products[$id]['amount'] = $amount;
         } else {
-            $this->deleteProduct($product);
+           $this->deleteProduct($product);
         }
     }
 
@@ -52,42 +52,40 @@ class Cart implements Iterator
     {
         $id = $product->getId();
         unset($this->products[$id]);
-
         //Delete Id from array
         $index = array_search($id, $this->ids);
         unset($this->ids[$index]);
         //Return state of array
         $this->ids = array_values($this->ids);
+        
     }
-    
+
     // Iterator
     public function current() 
     {
         $index = $this->ids[$this->position];
         return $this->products[$index];
+        print_R($this->produsts[$index]);
     }
-
     public function key() 
     {
         return $this->position;
+        print_r($this->position);
     }
-
     public function next() :void 
     {
         ++$this->position;
     }
-
     public function rewind() :void 
     {
         $this->position = 0;
     }
-
     public function valid() :bool 
     {
         return (isset($this->ids[$this->position]));
     }
-    //Iterato end
-
+    //Iterator end
+    
     //Return price of all products
     public function getPriceAll()
     {
@@ -102,18 +100,14 @@ class Cart implements Iterator
     public function sumProducts()
     {
         $sum=0;
-        foreach ($this->products as $res) {
             $sum=array_sum(array_column($this->products, 'amount'));
-        }
         return $sum;
     }
     
     //Prepare to export - convert usign JSON, array of objects to array of arrays
     public function convertArray()
     {
-        $arrayObjects= $this->products;
-        $json=json_encode($arrayObjects);
-        $arrayArrays=json_decode($json, true);
+        $arrayArrays=json_decode((json_encode($this->products)), true);
         return $arrayArrays;
     }
 

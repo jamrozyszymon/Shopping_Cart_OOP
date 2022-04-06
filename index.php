@@ -17,11 +17,11 @@ $cart = new Cart();
 // Add the products to the cart (product):
 $cart->addProduct($p1);
 $cart->addProduct($p2);
-//$cart->addProduct($p3);
+$cart->addProduct($p3);
 
 // Update some quantities (product, amount):
-$cart->updateProduct($p1, 2);
-$cart->updateProduct($p2, 2);
+//$cart->updateProduct($p1, 2);
+//$cart->updateProduct($p2, 2);
 
 // Delete a product (product):
 //$cart->deleteProduct($p1);
