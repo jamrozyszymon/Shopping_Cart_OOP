@@ -12,3 +12,15 @@ main{
 .mainfooter{
     padding-top: 30px;
 }
+
+.tile{
+    float:left;
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+
+.export{
+    clear:both;
+    padding-top: 30px;
+}
