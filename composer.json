@@ -1,0 +1,10 @@
+{
+    "name": "autoload/namespacer",
+    "autoload": {
+        "psr-4": {
+            "controller\\": "controller/",
+            "model\\": "model/"
+        }
+    },
+    "require": {}
+}

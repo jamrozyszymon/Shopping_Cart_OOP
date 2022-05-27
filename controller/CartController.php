@@ -6,13 +6,6 @@ use model\Cart;
 use model\Product;
 use model\CartExportModel;
 
-spl_autoload_register(function ($class)
-{
-    if(file_exists($class.'.php')) {
-        require $class.'.php';
-    }
-});
-
 //products sample(id,name,code,price)
 $p1= new Product(1,"Monitor", 111, 1000);
 $p2= new Product(2,"Mysz", 222, 100);

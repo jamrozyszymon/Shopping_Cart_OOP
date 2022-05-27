@@ -5,15 +5,24 @@ namespace model;
 use model\Product;
 use Iterator;
 
+/**
+ * Manage products in cart
+ */
 class Cart implements Iterator
 {
-    // Array for products
+    /**
+     * @var object[] $products Array for products
+     */
     public $products = array();
 
-    // Array for ID
+    /**
+     * @var int[] $ids Array for ID
+     */
     protected $ids = array();
 
-    // Itteration    
+    /**
+     * @var int $position Iteration
+     */   
     protected $position = 0;
 
     public function __construct() 
@@ -22,11 +31,12 @@ class Cart implements Iterator
         $this->ids = array();
     }
 
-    // Add product
+    /**
+     * Add or increment product
+     */
     public function addProduct(Product $product) 
     {
         $id = $product->getId();
-        // Add or increment
         if (!isset($this->products[$id])) {
             $this->products[$id] = array('product' => $product, 'amount' => 1);
             $this->ids[] = $id;
@@ -65,12 +75,10 @@ class Cart implements Iterator
     {
         $index = $this->ids[$this->position];
         return $this->products[$index];
-        print_R($this->produsts[$index]);
     }
     public function key() 
     {
         return $this->position;
-        print_r($this->position);
     }
     public function next() :void 
     {
