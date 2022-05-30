@@ -10,19 +10,14 @@ use Iterator;
  */
 class Cart implements Iterator
 {
-    /**
-     * @var object[] $products Array for products
-     */
-    public $products = array();
 
-    /**
-     * @var int[] $ids Array for ID
-     */
+    /** @var object[] $products Array for products */
+    protected $products = array();
+
+    /** @var int[] $ids Array for ID */
     protected $ids = array();
 
-    /**
-     * @var int $position Iteration
-     */   
+    /** @var int $position Iteration */   
     protected $position = 0;
 
     public function __construct() 
@@ -33,8 +28,10 @@ class Cart implements Iterator
 
     /**
      * Add or increment product
+     * 
+     * @param Product $product
      */
-    public function addProduct(Product $product) 
+    public function addProduct(Product $product)
     {
         $id = $product->getId();
         if (!isset($this->products[$id])) {
@@ -45,11 +42,15 @@ class Cart implements Iterator
         }
     }
 
-    // Update amount of products
+    /**
+     * Update amount of products or delete products
+     * 
+     * @param Product $product
+     * @param int $amount
+     */
     public function updateProduct(Product $product, $amount) 
     {
         $id = $product->getId();
-        // Update or delete
         if ($amount != 0) {
             $this->products[$id]['amount'] = $amount;
         } else {
@@ -57,7 +58,10 @@ class Cart implements Iterator
         }
     }
 
-    // Delete products
+    /**
+     * Delete products
+     * @param Product $product
+     */
     public function deleteProduct(Product $product)
     {
         $id = $product->getId();
@@ -67,7 +71,6 @@ class Cart implements Iterator
         unset($this->ids[$index]);
         //Return state of array
         $this->ids = array_values($this->ids);
-        
     }
 
     // Iterator
@@ -94,7 +97,10 @@ class Cart implements Iterator
     }
     //Iterator end
     
-    //Return price of all products
+    /**
+     * Return price of all products
+     * @return float $sumPrice
+     */
     public function getPriceAll()
     {
         $sumPrice=0;
@@ -104,7 +110,10 @@ class Cart implements Iterator
         return $sumPrice; 
     }
 
-    //Count sum of products in cart
+    /**
+     * Count sum of products in cart
+     * @return int $sum
+     */
     public function sumProducts()
     {
         $sum=0;

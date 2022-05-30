@@ -2,16 +2,25 @@
 
 namespace model;
 
+/**
+ * Export content of cart to csv or txt file
+ */
+
 class CartExportModel
 {
-    //Prepare to export - convert usign JSON, array of objects to array of arrays
+    /**
+     * Prepare to export - convert usign JSON, array of objects to array of arrays
+     * @return array $arrayArrays
+     */
     public function convertArray()
     {
         $arrayArrays=json_decode((json_encode($this->cart->products)), true);
         return $arrayArrays;
     }
 
-    //Export to .csv
+    /**
+     * Export to .csv
+     */
     public function exportCsv()
     {
         $result =[];
@@ -30,7 +39,9 @@ class CartExportModel
     fclose($export);
     }
 
-    //Export to .txt
+    /**
+     * Export to .txt
+     */
     public function exportTxt()
     {
         $fp = fopen('export/export.txt', 'w');
@@ -49,4 +60,3 @@ class CartExportModel
         fclose($fp);
     }
 }
-

@@ -6,7 +6,9 @@ use model\Cart;
 use model\Product;
 use model\CartExportModel;
 
-//products sample(id,name,code,price)
+/**
+ * Products sample(id,name,code,price):
+ */
 $p1= new Product(1,"Monitor", 111, 1000);
 $p2= new Product(2,"Mysz", 222, 100);
 $p3= new Product(3,"Klawiatura", 333, 100);
@@ -14,22 +16,30 @@ $p4= new Product(4,"Drukarka", 444, 1000);
 
 $cart = new Cart();
 
-// Add the products to the cart (product):
+/**
+ * Add the products to the cart (product):
+ */
 $cart->addProduct($p1);
 $cart->addProduct($p2);
 $cart->addProduct($p3);
 
-// Update some quantities (product, amount):
+/**
+ * Update some quantities (product, amount):
+ */
 //$cart->updateProduct($p1, 2);
 //$cart->updateProduct($p2, 2);
 
-// Delete a product (product):
+/**
+ * Delete a product (product):
+ */
 //$cart->deleteProduct($p1);
 
-//template for export
+/**
+ * Controller for export content of cart to csv or txt file
+ */
 class CartController
 {
-    public function exportToFile()
+    public function exportToFile() : void
     {
         if(isset($_POST['csv'])){
         $this->cartExport->exportCsv();
@@ -47,3 +57,5 @@ $cartExport= new CartExportModel;
 $cartController->cartExport=$cartExport;
 $cartExport->cart=$cart;
 $index=$cartController->exportToFile();
+print_r($index);
+
